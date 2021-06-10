@@ -11,7 +11,7 @@ Globals:
     TracingEnabled: true
   Function:
     Runtime: python3.8
-    # Tracing: Active
+    Tracing: Active
 
 Resources:
   Function:
@@ -26,9 +26,9 @@ Resources:
             Method: GET
             Path: /
 
-  LogGroup:
-    Type: AWS::Logs::LogGroup
-    Properties:
-      LogGroupName: !Sub "/aws/lambda/${Function}"
-      RetentionInDays: 7
+  # LogGroup:
+  #   Type: AWS::Logs::LogGroup
+  #   Properties:
+  #     LogGroupName: !Sub "/aws/lambda/${Function}"
+  #     RetentionInDays: 7
 
