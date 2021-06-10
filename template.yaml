@@ -14,7 +14,7 @@ Globals:
     Tracing: Active
 
 Resources:
-  Function:
+  MyFunction:
     Type: AWS::Serverless::Function
     Properties:
       CodeUri: .
@@ -26,9 +26,9 @@ Resources:
             Method: GET
             Path: /
 
-  LogGroup:
-    Type: AWS::Logs::LogGroup
-    Properties:
-      LogGroupName: !Sub "/aws/lambda/${Function}"
-      RetentionInDays: 7
+  # LogGroup:
+  #   Type: AWS::Logs::LogGroup
+  #   Properties:
+  #     LogGroupName: !Sub "/aws/lambda/${Function}"
+  #     RetentionInDays: 7
 
