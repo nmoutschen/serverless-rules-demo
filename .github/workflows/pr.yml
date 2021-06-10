@@ -26,5 +26,6 @@ jobs:
         # Annotate PR based on cfn-lint's findings
       - name: Publish Test Report
         uses: mikepenz/action-junit-report@v2
+        if: ${{ failure() }}
         with:
           report_paths: cfn_lint_report.xml
