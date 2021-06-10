@@ -1,0 +1,30 @@
+name: cfn-lint-serverless
+
+on:
+  pull_request:
+    branches:
+      # TODO: replace this if you are not using 'main' as your target
+      # branch for pull requests.
+      - main
+
+jobs:
+  cfn-lint-serverless:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Set up Python 3.8
+        uses: actions/setup-python@v2
+        with:
+          python-version: "3.8"
+      - name: Install cfn-lint-serverless
+        # Install cfn-lint-serverless
+        run: pip install cfn-lint cfn-lint-serverless
+      - name: Lint CloudFormation template
+        # TODO: replace here with your template name if you are not
+        # using 'template.yaml'.
+        run: cfn-lint template.yaml -a cfn_lint_serverless.rules -f junit --output-file cfn_lint_report.xml
+        # Annotate PR based on cfn-lint's findings
+      - name: Publish Test Report
+        uses: mikepenz/action-junit-report@v2
+        with:
+          report_paths: cfn_lint_report.xml

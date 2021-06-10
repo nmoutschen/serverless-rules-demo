@@ -1,0 +1,34 @@
+AWSTemplateFormatVersion: "2010-09-09"
+Transform: "AWS::Serverless-2016-10-31"
+
+Globals:
+  Api:
+    MethodSettings:
+      - HttpMethod: "*"
+        ResourcePath: "/*"
+        ThrottlingBurstLimit: 1000
+        ThrottlingRateLimit: 10
+    TracingEnabled: true
+  Function:
+    Runtime: python3.8
+    Tracing: Active
+
+Resources:
+  Function:
+    Type: AWS::Serverless::Function
+    Properties:
+      CodeUri: .
+      Handler: main.handler
+      Events:
+        Api:
+          Type: Api
+          Properties:
+            Method: GET
+            Path: /
+
+  LogGroup:
+    Type: AWS::Logs::LogGroup
+    Properties:
+      LogGroupName: !Sub "/aws/lambda/${Function}"
+      RetentionInDays: 7
+
