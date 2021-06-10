@@ -14,7 +14,7 @@ Globals:
     Tracing: Active
 
 Resources:
-  Function:
+  MyFunction:
     Type: AWS::Serverless::Function
     Properties:
       CodeUri: .
